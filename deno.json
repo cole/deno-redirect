@@ -5,6 +5,6 @@
     }
   },
   "tasks": {
-    "dev": "deno run --allow-net --allow-env --watch redirect.ts"
+    "dev": "deno run --allow-net --allow-env --watch main.ts"
   }
 }
