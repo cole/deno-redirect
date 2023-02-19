@@ -1,0 +1,21 @@
+name: Deploy
+on: push
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    permissions:
+      id-token: write # This is required to allow the GitHub Action to authenticate with Deno Deploy.
+      contents: read
+    steps:
+      - uses: actions/checkout@v3
+      - uses: denoland/setup-deno@v1.1.1
+        with:
+          deno-version: v1.x
+      - run: deno fmt --check
+      - run: deno lint
+      - run: deno test --allow-env
+      - uses: denoland/deployctl@v1
+        with:
+          project: domain-redirect # deno deploy project name
+          entrypoint: main.ts
